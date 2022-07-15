@@ -1,15 +1,15 @@
 import express from "express";
-import { config } from "dotenv";
 import morgan from "morgan";
-import routes from "./routes/router.js";
+import cors from "cors";
 
-config();
+import routes from "./routes/router.js";
 
 const app = express();
 
 const port = process.env.PORT || 3001;
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
