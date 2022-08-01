@@ -1,8 +1,10 @@
-import { initializeApp, applicationDefault } from "firebase-admin/app";
+import admin from "firebase-admin";
 import { getFirestore } from "firebase-admin/firestore";
 
-initializeApp({
-  credential: applicationDefault(),
+import serviceAccount from "./firebase-keys.js";
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
 });
 
 console.log("Database online");
