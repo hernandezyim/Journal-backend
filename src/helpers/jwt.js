@@ -3,7 +3,6 @@ import { JWT_SECRET } from "../configs/keys.js";
 
 export const createToken = (optionsCreateToken) => {
   const { id, name, expiresIn = "2h" } = optionsCreateToken;
-
   const payload = {
     id,
     name,
@@ -17,10 +16,9 @@ export const createToken = (optionsCreateToken) => {
 };
 
 export const verifyToken = (token) => {
-  console.log(JWT_SECRET);
   try {
     return jwt.verify(token, JWT_SECRET);
-  } catch (error) {
-    return false;
-  }
+  } catch (error) {}
 };
+
+export const decodeToken = (token) => jwt.decode(token);

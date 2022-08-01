@@ -1,9 +1,9 @@
-import { db } from "../configs/firebase.js";
+import db from "../configs/firebase.js";
 
 const users = db.collection("users");
 
-export const saveUser = async (user) => {
-  const { name, email, password } = user;
+const save = async (user) => {
+  const { name, email, password = "" } = user;
 
   const { id } = await users.add({
     name,
@@ -14,13 +14,7 @@ export const saveUser = async (user) => {
   return id;
 };
 
-export const deleteUser = async (user) => {
-  const { id } = user;
-
-  await users.doc(id).delete();
-};
-
-export const isSignIn = async (email) => {
+const isSignIn = async (email) => {
   const user = await users.where("email", "==", email).get();
 
   if (user.empty) return;
@@ -31,3 +25,5 @@ export const isSignIn = async (email) => {
   };
   return userData;
 };
+
+export default { save, isSignIn };

@@ -1,15 +1,12 @@
 import { verifyToken } from "../helpers/jwt.js";
-import newError from "../helpers/newError.js";
 
 const checkAuth = (req, res, next) => {
-  const token = req.headers.authorization;
+  const token = req.headers["x-access-token"]?.split(" ")[1];
+
   const payload = verifyToken(token);
 
-  if (!payload) {
-    newError({ status: 401, message: "Invalid token" });
-  }
+  if (!payload) return res.status(401).json({ message: "Unauthorized" });
 
-  console.log(payload);
   req.user = payload;
   next();
 };

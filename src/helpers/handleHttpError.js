@@ -1,10 +1,7 @@
-const handleHttpError = (err, res) => {
+const handleHttpError = (err, req, res, next) => {
   const status = err.status || 500;
-  console.log("aaa");
   const message = err.message || "Something went wrong";
-  res.status(status).json({
-    message,
-    errors: err.errors,
-  });
+  console.log(status, message);
+  res.status(status).json({ message });
 };
 export default handleHttpError;

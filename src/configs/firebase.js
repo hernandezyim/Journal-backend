@@ -5,4 +5,6 @@ initializeApp({
   credential: applicationDefault(),
 });
 
-export const db = getFirestore();
+console.log("Database online");
+
+export default getFirestore();
